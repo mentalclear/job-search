@@ -1,6 +1,7 @@
 # job-search
 
 A project from Vue Mastercalss course from Udemy
+Section 6 current
 
 ## Project setup
 ```
