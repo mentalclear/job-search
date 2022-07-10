@@ -10,7 +10,7 @@
           border-b border-solid border-brand-gray-1
         "
       >
-        <a :href="url" class="flex items-center h-full text-xl">{{ company }}</a>
+        <a href="/" class="flex items-center h-full text-xl">{{ company }}</a>
         <nav class="h-full ml-12">
           <ul class="flex h-full p-0 m-0 list-none">
             <li 
@@ -28,20 +28,36 @@
             </li>
           </ul>
         </nav>
+        <div class="flex items-center h-full ml-auto">
+          <ActionButton v-if="!isLoggedIn" data-test="login-button" @click="logIn" />
+          <ProfileImage v-else data-test="profile-image" />
+        </div>
       </div>  
     </div>
   </header>
 </template>
 
 <script>
+import ActionButton from './ActionButton.vue';
+import ProfileImage from './ProfileImage.vue';
+
 export default {
   name: "MainNav",
+  components: {
+    ActionButton,
+    ProfileImage,
+  },
   data() {
     return {
-      company: "Bobo Careers",
-      url: 'https://careers.google.com',
-      navLinks: ['Teams', 'Locations', 'Life at BoBo Corp', 'How we hire', 'Students', 'Jobs']
+      company: "Bobo Careers",      
+      navLinks: ['Teams', 'Locations', 'Life at BoBo Corp', 'How we hire', 'Students', 'Jobs'],
+      isLoggedIn: false,
     };
+  },
+  methods: {
+    logIn () {
+      this.isLoggedIn = true;
+    },
   },
 };
 </script>

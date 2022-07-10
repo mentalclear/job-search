@@ -27,4 +27,28 @@ describe('MainNav', () => {
       expect(navMenuItems.length).toBe(6);
     });
   });
+
+  describe('When user is logged out', () => {
+    it('Prompt user to sign in', () => {
+      const wrapper = mount(MainNav);
+      const loginButton = wrapper.find('[data-test=\'login-button\']');      
+      expect(loginButton.exists()).toBeTruthy();      
+    });
+  });
+  describe('When user is logged in', () => {
+    it('Prompt user to sign in', async () => {
+      let profileImage;
+      const wrapper = mount(MainNav);
+      profileImage = wrapper.find('[data-test=\'profile-image\']');
+      expect(profileImage.exists()).toBeFalsy();      
+      
+      const loginButton = wrapper.find('[data-test=\'login-button\']');
+      await loginButton.trigger('click');
+
+      // Requires to requery the element again otherwise fails because 
+      // first time it wasn't rendered
+      profileImage = wrapper.find('[data-test=\'profile-image\']');
+      expect(profileImage.exists()).toBeTruthy();      
+    });
+  });
 });
