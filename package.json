@@ -6,10 +6,13 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit --coverage",
-    "test:watch": "vue-cli-service test:unit --watch",
+    "test:watch": "vue-cli-service test:unit --watch --verbose",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/vue-fontawesome": "^3.0.1",
     "@vue/eslint-config-airbnb": "^6.0.0",
     "autoprefixer": "^10",
     "core-js": "^3.8.3",
