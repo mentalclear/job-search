@@ -29,6 +29,7 @@
           <ActionButton
             v-if="!isLoggedIn"
             data-test="login-button"
+            text="Sign In"
             @click="logIn"
           />
           <ProfileImage
@@ -57,7 +58,7 @@ export default {
       navLinks: [
         'Teams',
         'Locations',
-        'Life at BoBo Corp',
+        'Life at BoBo',
         'How we hire',
         'Students',
         'Jobs',

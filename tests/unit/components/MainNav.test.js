@@ -15,7 +15,7 @@ describe('MainNav', () => {
       expect(navMenuNames).toEqual([
         'Teams',
         'Locations',
-        'Life at BoBo Corp',
+        'Life at BoBo',
         'How we hire',
         'Students',
         'Jobs',
