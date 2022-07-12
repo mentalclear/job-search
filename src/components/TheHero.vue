@@ -1,6 +1,6 @@
 <template>
   <main>
-    <section class="flex flex-col h-screen pt-10 pb-20 bg-yellow-500">
+    <section class="flex flex-col h-screen pt-10 pb-20 bg-yellow-100">
       <div class="grid grid-cols-12">
         <div class="col-start-1 col-span-1 border border-blue-700">
           1 column
