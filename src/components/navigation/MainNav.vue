@@ -6,10 +6,12 @@
       <div
         class="flex flex-nowrap h-full px-8 mx-auto border-b border-solid border-brand-gray-1"
       >
-        <a
-          href="/"
+        <RouterLink
+          :to="{name: 'Home'}"
           class="flex items-center h-full text-xl"
-        >{{ company }}</a>
+        >
+          Bobo Careers
+        </RouterLink>
         <nav class="h-full ml-12">
           <ul class="flex h-full p-0 m-0 list-none">
             <li
@@ -62,7 +64,6 @@ export default {
   },
   data() {
     return {
-      company: 'Bobo Careers',
       navLinks: [
         'Teams',
         'Locations',
