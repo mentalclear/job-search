@@ -5,7 +5,8 @@ describe('SubNav', () => {
   const createConfig = (routeName) => ({
     global: {
       // Used to mock global objects, in this case $router.
-      // Should use real world names. In this case JobResults
+      // Should use real world names.
+      // Below gets passed JobResults - which is a real world name
       mocks: {
         $route: {
           name: routeName,
