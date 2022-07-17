@@ -3,6 +3,7 @@
   <form
     class="flex items-center w-full h-12 mt-14
     border border-solid border-brad-gray-3 rounded-3xl"
+    @submit.prevent="searchForJobs"
   >
     <FontAwesomeIcon
       :icon="['fas', 'search']"
@@ -20,6 +21,7 @@
           id="role"
           v-model="role"
           placeholder="Software Engineer"
+          data-test="role-input"
         />
       </div>
 
@@ -41,6 +43,7 @@
           id="location"
           v-model="location"
           placeholder="Los Angeles"
+          data-test="location-input"
         />
       </div>
     </div>
@@ -48,6 +51,7 @@
       text="Search"
       type="secondary"
       class="rounded-r-3xl hover:rounded-r-3xl"
+      data-test="form-submit-button"
     />
   </form>
 </template>
@@ -67,6 +71,18 @@ export default {
       role: '',
       location: '',
     };
+  },
+  methods: {
+    searchForJobs() {
+      this.$router.push({
+        name: 'JobResults',
+        // Query parameters will be sent to the url, like: ?role=blah,location=blah
+        query: {
+          role: this.role,
+          location: this.location,
+        },
+      });
+    },
   },
 };
 </script>
