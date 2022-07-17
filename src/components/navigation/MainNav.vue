@@ -16,16 +16,16 @@
           <ul class="flex h-full p-0 m-0 list-none">
             <li
               v-for="link in navLinks"
-              :key="link"
+              :key="link.text"
               class="h-full ml-9 first:ml-0"
               data-test="nav-list-item"
             >
-              <a
-                href=""
+              <RouterLink
+                :to="link.url"
                 class="flex items-center h-full py-2.5"
               >
-                {{ link }}
-              </a>
+                {{ link.text }}
+              </RouterLink>
             </li>
           </ul>
         </nav>
@@ -65,12 +65,12 @@ export default {
   data() {
     return {
       navLinks: [
-        'Teams',
-        'Locations',
-        'Life at BoBo',
-        'How we hire',
-        'Students',
-        'Jobs',
+        { text: 'Teams', url: '/' },
+        { text: 'Locations', url: '/' },
+        { text: 'Life at BoBo', url: '/' },
+        { text: 'How we hire', url: '/' },
+        { text: 'Students', url: '/' },
+        { text: 'Jobs', url: '/jobs/results' },
       ],
       isLoggedIn: false,
     };

@@ -2,22 +2,26 @@ import { mount } from '@vue/test-utils';
 import SubNav from '@/components/navigation/SubNav.vue';
 
 describe('SubNav', () => {
-  describe('when user is on job page', () => {
-    it('Display job count', () => {
-      const wrapper = mount(SubNav, {
-        global: {
-          // Ask vue-test to install a stub instead of a component.
-          stubs: {
-            FontAwesomeIcon: true,
-          },
+  const createConfig = (routeName) => ({
+    global: {
+      // Used to mock global objects, in this case $router.
+      // Should use real world names. In this case JobResults
+      mocks: {
+        $route: {
+          name: routeName,
         },
-        data() {
-          return {
-            onJobResultsPage: true,
-          };
-        },
-      });
+      },
+      // Ask vue-test to install a stub instead of a child component.
+      stubs: {
+        FontAwesomeIcon: true,
+      },
+    },
+  });
 
+  describe('when user is on job page', () => {
+    it('should display job count', () => {
+      const routeName = 'JobResults';
+      const wrapper = mount(SubNav, createConfig(routeName));
       const jobCount = wrapper.find('[data-test="job-count"]');
       expect(jobCount.exists()).toBe(true);
     });
@@ -25,19 +29,8 @@ describe('SubNav', () => {
 
   describe('when user is not on job page', () => {
     it('Does NOT display job count', () => {
-      const wrapper = mount(SubNav, {
-        global: {
-          stubs: {
-            FontAwesomeIcon: true,
-          },
-        },
-        data() {
-          return {
-            onJobResultsPage: false,
-          };
-        },
-      });
-
+      const routeName = 'Home';
+      const wrapper = mount(SubNav, createConfig(routeName));
       const jobCount = wrapper.find('[data-test="job-count"]');
       expect(jobCount.exists()).toBe(false);
     });
