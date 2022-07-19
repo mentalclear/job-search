@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import SubNav from '@/components/navigation/SubNav.vue';
 
 describe('SubNav', () => {
-  const createConfig = (routeName) => ({
+  const createConfig = routeName => ({
     global: {
       // Used to mock global objects, in this case $router.
       // Should use real world names.

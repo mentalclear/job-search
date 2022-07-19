@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import TheHero from '@/components/jobsearch/TheHero.vue';
+import TheHero from '@/components/JobSearch/TheHero.vue';
 
 export default {
   name: 'HomeView',
