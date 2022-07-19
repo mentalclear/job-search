@@ -19,7 +19,7 @@ describe('MainNav', () => {
     it('Display menu items for navigation', () => {
       const wrapper = shallowMount(MainNav, createConfig());
       const navMenuItems = wrapper.findAll("[data-test='nav-list-item']");
-      const navMenuNames = navMenuItems.map((item) => item.text());
+      const navMenuNames = navMenuItems.map(item => item.text());
       expect(navMenuNames).toEqual([
         'Teams',
         'Locations',

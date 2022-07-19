@@ -5,6 +5,7 @@
         v-for="job in jobs"
         :key="job.id"
         :job="job"
+        data-test="job-listing"
       />
     </ol>
   </main>
