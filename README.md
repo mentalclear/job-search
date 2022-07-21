@@ -2,7 +2,7 @@
 
 A project from Vue Mastercalss course from Udemy
 
-Info on (modes)[https://cli.vuejs.org/guide/mode-and-env.html]
+Info on [modes](https://cli.vuejs.org/guide/mode-and-env.html)
 
 ## Project setup
 ```
