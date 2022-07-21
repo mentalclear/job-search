@@ -1,6 +1,7 @@
 # job-search
 
 A project from Vue Mastercalss course from Udemy
+Mimicks Google Jobs website
 
 Info on [modes](https://cli.vuejs.org/guide/mode-and-env.html)
 
