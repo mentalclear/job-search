@@ -1,7 +1,8 @@
 # job-search
 
 A project from Vue Mastercalss course from Udemy
-Section 6 current
+
+Info on (modes)[https://cli.vuejs.org/guide/mode-and-env.html]
 
 ## Project setup
 ```
