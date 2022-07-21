@@ -37,7 +37,7 @@ describe('JobListings', () => {
   it('should fetch jobs', () => {
     const $route = createRoute();
     shallowMount(JobListings, creatConfig($route));
-    expect(axios.get).toHaveBeenCalledWith('http://localhost:3000/jobs');
+    expect(axios.get).toHaveBeenCalledWith('http://myfakeapi.com/jobs');
   });
   it('should create job listing for a maximum of 10 jobs', async () => {
     // Left axios.get here to be more readabile
@@ -70,6 +70,45 @@ describe('JobListings', () => {
       const $route = createRoute(queryParams);
       const wrapper = shallowMount(JobListings, creatConfig($route));
       expect(wrapper.text()).toMatch('Page 3');
+    });
+  });
+
+  describe('when user is on the first page of job results', () => {
+    it('should not show link to previous page', () => {
+      const queryParams = { page: '1' };
+      const $route = createRoute(queryParams);
+      const wrapper = shallowMount(JobListings, creatConfig($route));
+      const previousPageLink = wrapper.find('[data-test="previous-page-link"]');
+      expect(previousPageLink.exists()).toBeFalsy();
+    });
+
+    it('should show link to the next page', async () => {
+      const queryParams = { page: '1' };
+      const $route = createRoute(queryParams);
+      const wrapper = shallowMount(JobListings, creatConfig($route));
+      await flushPromises();
+      const nextPageLink = wrapper.find('[data-test="next-page-link"]');
+      expect(nextPageLink.exists()).toBeTruthy();
+    });
+  });
+
+  describe('when user is on the last page', () => {
+    it('should not show link to next page', async () => {
+      const queryParams = { page: '2' };
+      const $route = createRoute(queryParams);
+      const wrapper = shallowMount(JobListings, creatConfig($route));
+      await flushPromises();
+      const nextPageLink = wrapper.find('[data-test="next-page-link"]');
+      expect(nextPageLink.exists()).toBeFalsy();
+    });
+
+    it('should show link to the previous page', async () => {
+      const queryParams = { page: '2' };
+      const $route = createRoute(queryParams);
+      const wrapper = shallowMount(JobListings, creatConfig($route));
+      await flushPromises();
+      const previousPageLink = wrapper.find('[data-test="previous-page-link"]');
+      expect(previousPageLink.exists()).toBeTruthy();
     });
   });
 });
