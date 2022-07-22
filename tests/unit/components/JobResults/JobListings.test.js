@@ -1,9 +1,5 @@
-import axios from 'axios';
 import { flushPromises, RouterLinkStub, shallowMount } from '@vue/test-utils';
 import JobListings from '@/components/JobResults/JobListings.vue';
-
-// Mocking axios with jest, so later only mocked axios is used.
-jest.mock('axios');
 
 describe('JobListings', () => {
   const createRoute = (queryParams = {}) => ({
@@ -12,11 +8,19 @@ describe('JobListings', () => {
       ...queryParams,
     },
   });
+  const createStore = (config = {}) => ({
+    state: {
+      jobs: Array(15).fill({}),
+    },
+    dispatch: jest.fn(),
+    ...config,
+  });
 
-  const creatConfig = $route => ({
+  const createConfig = ($route, $store) => ({
     global: {
       mocks: {
         $route,
+        $store,
       },
       stubs: {
         RouterLink: RouterLinkStub,
@@ -24,28 +28,26 @@ describe('JobListings', () => {
     },
   });
 
-  beforeEach(() => {
-    // Mocking returned value for the mocked axios call:
-    axios.get.mockResolvedValue({ data: Array(15).fill({}) });
+  describe('when component mounts', () => {
+    it('should make call to fetch jobs from API', () => {
+      const $route = createRoute();
+      const dispatch = jest.fn();
+      const $store = createStore({ dispatch });
+      shallowMount(JobListings, createConfig($route, $store));
+      expect(dispatch).toHaveBeenCalledWith('FETCH_JOBS');
+    });
   });
 
-  afterEach(() => {
-    // Resetting mocks after each test to decouple tests
-    axios.get.mockReset();
-  });
-
-  it('should fetch jobs', () => {
-    const $route = createRoute();
-    shallowMount(JobListings, creatConfig($route));
-    expect(axios.get).toHaveBeenCalledWith('http://myfakeapi.com/jobs');
-  });
   it('should create job listing for a maximum of 10 jobs', async () => {
-    // Left axios.get here to be more readabile
-    // Mocking returned value for the mocked axios call:
-    axios.get.mockResolvedValue({ data: Array(15).fill({}) });
     const queryParams = { page: '1' };
     const $route = createRoute(queryParams);
-    const wrapper = shallowMount(JobListings, creatConfig($route));
+    const numberOfJobsInStore = 15;
+    const $store = createStore({
+      state: {
+        jobs: Array(numberOfJobsInStore).fill({}),
+      },
+    });
+    const wrapper = shallowMount(JobListings, createConfig($route, $store));
 
     // Because there is no real Promise involved in this test this is the
     // mechanism to resolve the Promise immediately.
@@ -57,10 +59,10 @@ describe('JobListings', () => {
 
   describe('when query params exclude page number', () => {
     it('should display Page 1', () => {
-      axios.get.mockResolvedValue({ data: Array(15).fill({}) });
       const queryParams = { page: undefined };
       const $route = createRoute(queryParams);
-      const wrapper = shallowMount(JobListings, creatConfig($route));
+      const $store = createStore();
+      const wrapper = shallowMount(JobListings, createConfig($route, $store));
       expect(wrapper.text()).toMatch('Page 1');
     });
   });
@@ -68,7 +70,8 @@ describe('JobListings', () => {
     it('should display page number', () => {
       const queryParams = { page: '3' };
       const $route = createRoute(queryParams);
-      const wrapper = shallowMount(JobListings, creatConfig($route));
+      const $store = createStore();
+      const wrapper = shallowMount(JobListings, createConfig($route, $store));
       expect(wrapper.text()).toMatch('Page 3');
     });
   });
@@ -77,7 +80,8 @@ describe('JobListings', () => {
     it('should not show link to previous page', () => {
       const queryParams = { page: '1' };
       const $route = createRoute(queryParams);
-      const wrapper = shallowMount(JobListings, creatConfig($route));
+      const $store = createStore();
+      const wrapper = shallowMount(JobListings, createConfig($route, $store));
       const previousPageLink = wrapper.find('[data-test="previous-page-link"]');
       expect(previousPageLink.exists()).toBeFalsy();
     });
@@ -85,7 +89,12 @@ describe('JobListings', () => {
     it('should show link to the next page', async () => {
       const queryParams = { page: '1' };
       const $route = createRoute(queryParams);
-      const wrapper = shallowMount(JobListings, creatConfig($route));
+      const $store = createStore({
+        state: {
+          jobs: Array(15).fill({}),
+        },
+      });
+      const wrapper = shallowMount(JobListings, createConfig($route, $store));
       await flushPromises();
       const nextPageLink = wrapper.find('[data-test="next-page-link"]');
       expect(nextPageLink.exists()).toBeTruthy();
@@ -96,7 +105,12 @@ describe('JobListings', () => {
     it('should not show link to next page', async () => {
       const queryParams = { page: '2' };
       const $route = createRoute(queryParams);
-      const wrapper = shallowMount(JobListings, creatConfig($route));
+      const $store = createStore({
+        state: {
+          jobs: Array(15).fill({}),
+        },
+      });
+      const wrapper = shallowMount(JobListings, createConfig($route, $store));
       await flushPromises();
       const nextPageLink = wrapper.find('[data-test="next-page-link"]');
       expect(nextPageLink.exists()).toBeFalsy();
@@ -105,7 +119,12 @@ describe('JobListings', () => {
     it('should show link to the previous page', async () => {
       const queryParams = { page: '2' };
       const $route = createRoute(queryParams);
-      const wrapper = shallowMount(JobListings, creatConfig($route));
+      const $store = createStore({
+        state: {
+          jobs: Array(15).fill({}),
+        },
+      });
+      const wrapper = shallowMount(JobListings, createConfig($route, $store));
       await flushPromises();
       const previousPageLink = wrapper.find('[data-test="previous-page-link"]');
       expect(previousPageLink.exists()).toBeTruthy();
