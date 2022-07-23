@@ -1,0 +1,39 @@
+<template>
+  <ul>
+    <li
+      v-for="spotlight in spotlights"
+      :key="spotlight.id"
+    >
+      <slot
+        :img="spotlight.img"
+        :title="spotlight.title"
+        :description="spotlight.description"
+      />
+    </li>
+  </ul>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  name: 'TheSpotlight',
+  data() {
+    return {
+      spotlights: [],
+    };
+  },
+  async mounted() {
+    const baseUrl = process.env.VUE_APP_API_URL;
+    const url = `${baseUrl}/spotlights`;
+
+    try {
+      const response = await axios.get(url);
+      this.spotlights = response.data;
+    } catch (e) {
+      console.error(e);
+    }
+  },
+};
+
+</script>
