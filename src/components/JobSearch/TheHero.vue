@@ -18,23 +18,23 @@
       </div>
     </section>
     <TheSpotlight class="flex flex-row justify-center pb-16">
-      <template #default="slotProps">
+      <template #default="{img, title, description}">
         <RouterLink
           to="/jobs/results"
           class="flex flex-col mx-5 border rounded-lg w-72 bg-brand-gray-2 h-96"
         >
           <img
-            :src="slotProps.spotlight.img"
+            :src="img"
             alt="Image"
             class="object-contain"
           >
           <div class="h-48 px-6 py-4 mt-3">
             <h3 class="text-lg font-medium">
-              {{ slotProps.spotlight.title }}
+              {{ title }}
             </h3>
 
             <p class="mt-3 text-sm">
-              {{ slotProps.spotlight.description }}
+              {{ description }}
             </p>
           </div>
           <RouterLink

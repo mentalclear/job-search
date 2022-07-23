@@ -4,7 +4,11 @@
       v-for="spotlight in spotlights"
       :key="spotlight.id"
     >
-      <slot :spotlight="spotlight" />
+      <slot
+        :img="spotlight.img"
+        :title="spotlight.title"
+        :description="spotlight.description"
+      />
     </li>
   </ul>
 </template>
