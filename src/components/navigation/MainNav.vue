@@ -67,7 +67,7 @@ export default {
   data() {
     return {
       navLinks: [
-        { text: 'Teams', url: '/' },
+        { text: 'Teams', url: '/teams' },
         { text: 'Locations', url: '/' },
         { text: 'Life at BoBo', url: '/' },
         { text: 'How we hire', url: '/' },
