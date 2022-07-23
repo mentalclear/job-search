@@ -2,10 +2,11 @@
   <div class="py-5 border-b border-solid border-brand-gray-2">
     <div
       class="flex flex-wrap items-center justify-between cursor-pointer"
+      data-test="clickable-area"
       @click="open"
     >
       <h3 class="text-base font-semibold">
-        Organizations
+        {{ header }}
       </h3>
       <FontAwesomeIcon :icon="caretIcon" />
     </div>
@@ -13,7 +14,9 @@
       v-if="isOpen"
       class="w-full mt-5"
     >
-      Child
+      <slot>
+        <p>Whoops, something has forgotten to populate me!</p>
+      </slot>
     </div>
   </div>
 </template>
@@ -21,6 +24,12 @@
 <script>
 export default {
   name: 'TheAccordion',
+  props: {
+    header: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       isOpen: false,
