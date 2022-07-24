@@ -9,8 +9,8 @@ describe('JobListings', () => {
     },
   });
   const createStore = (config = {}) => ({
-    state: {
-      jobs: Array(15).fill({}),
+    getters: {
+      FILTER_JOBS_BY_ORGANIZATIONS: Array(15).fill({}),
     },
     dispatch: jest.fn(),
     ...config,
@@ -43,8 +43,8 @@ describe('JobListings', () => {
     const $route = createRoute(queryParams);
     const numberOfJobsInStore = 15;
     const $store = createStore({
-      state: {
-        jobs: Array(numberOfJobsInStore).fill({}),
+      getters: {
+        FILTER_JOBS_BY_ORGANIZATIONS: Array(numberOfJobsInStore).fill({}),
       },
     });
     const wrapper = shallowMount(JobListings, createConfig($route, $store));
@@ -89,11 +89,7 @@ describe('JobListings', () => {
     it('should show link to the next page', async () => {
       const queryParams = { page: '1' };
       const $route = createRoute(queryParams);
-      const $store = createStore({
-        state: {
-          jobs: Array(15).fill({}),
-        },
-      });
+      const $store = createStore();
       const wrapper = shallowMount(JobListings, createConfig($route, $store));
       await flushPromises();
       const nextPageLink = wrapper.find('[data-test="next-page-link"]');
@@ -105,11 +101,7 @@ describe('JobListings', () => {
     it('should not show link to next page', async () => {
       const queryParams = { page: '2' };
       const $route = createRoute(queryParams);
-      const $store = createStore({
-        state: {
-          jobs: Array(15).fill({}),
-        },
-      });
+      const $store = createStore();
       const wrapper = shallowMount(JobListings, createConfig($route, $store));
       await flushPromises();
       const nextPageLink = wrapper.find('[data-test="next-page-link"]');
@@ -119,11 +111,7 @@ describe('JobListings', () => {
     it('should show link to the previous page', async () => {
       const queryParams = { page: '2' };
       const $route = createRoute(queryParams);
-      const $store = createStore({
-        state: {
-          jobs: Array(15).fill({}),
-        },
-      });
+      const $store = createStore();
       const wrapper = shallowMount(JobListings, createConfig($route, $store));
       await flushPromises();
       const previousPageLink = wrapper.find('[data-test="previous-page-link"]');

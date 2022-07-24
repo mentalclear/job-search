@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import SubNav from '@/components/navigation/SubNav.vue';
 
 describe('SubNav', () => {
-  const createConfig = routeName => ({
+  const createConfig = (routeName, $store = {}) => ({
     global: {
       // Used to mock global objects, in this case $router.
       // Should use real world names.
@@ -11,6 +11,7 @@ describe('SubNav', () => {
         $route: {
           name: routeName,
         },
+        $store,
       },
       // Ask vue-test to install a stub instead of a child component.
       stubs: {
@@ -22,9 +23,14 @@ describe('SubNav', () => {
   describe('when user is on job page', () => {
     it('should display job count', () => {
       const routeName = 'JobResults';
-      const wrapper = mount(SubNav, createConfig(routeName));
+      const $store = {
+        getters: {
+          FILTER_JOBS_BY_ORGANIZATIONS: [{ id: 1 }, { id: 2 }],
+        },
+      };
+      const wrapper = mount(SubNav, createConfig(routeName, $store));
       const jobCount = wrapper.find('[data-test="job-count"]');
-      expect(jobCount.exists()).toBe(true);
+      expect(jobCount.text()).toMatch('2 jobs matched');
     });
   });
 

@@ -1,3 +1,7 @@
-const sushi = ['Tuna', 'Slamon', 'Yellowtail', 'Eel', 'Shrimp', 'Octopus', 'Uni'];
+const jobs = [
+  { title: 'Angular Developer', org: 'Microsoft' },
+  { title: 'Programmer', org: 'Google' },
+  { title: 'Developer', org: 'Microsoft' },
+];
 
-console.log(sushi.slice(3, 6));
+console.log(jobs.filter(job => job.org === 'Microsoft'));

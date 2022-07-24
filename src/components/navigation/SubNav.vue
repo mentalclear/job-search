@@ -14,7 +14,9 @@
           class="mr-3"
         />
         <span>
-          <span class="text-brand-green-1">1653</span>
+          <span class="text-brand-green-1">
+            {{ FILTER_JOBS_BY_ORGANIZATIONS.length }}
+          </span>
           jobs matched
         </span>
       </div>
@@ -23,9 +25,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import { FILTER_JOBS_BY_ORGANIZATIONS } from '@/store/constants';
+
 export default {
   name: 'SubNav',
   computed: {
+    ...mapGetters([FILTER_JOBS_BY_ORGANIZATIONS]),
     onJobResultsPage() {
       return this.$route.name === 'JobResults';
     },
