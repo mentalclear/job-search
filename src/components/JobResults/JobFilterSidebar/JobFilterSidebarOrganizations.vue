@@ -12,6 +12,7 @@
               :id="organization"
               v-model="selectedOrganizations"
               :value="organization"
+              :data-test="organization"
               type="checkbox"
               class="mr-3"
               @change="selectOrganization"
