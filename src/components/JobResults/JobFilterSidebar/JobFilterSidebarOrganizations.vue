@@ -3,37 +3,17 @@
     <div class="mt-5">
       <fieldset>
         <ul class="flex flex-row flex-wrap">
-          <li class="w-1/2 h-8">
+          <li
+            v-for="organization in UNIQUE_ORGANIZATIONS"
+            :key="organization"
+            class="w-1/2 h-8"
+          >
             <input
-              id="VueTube"
+              :id="organization"
               type="checkbox"
               class="mr-3"
             >
-            <label for="VueTube">VueTube</label>
-          </li>
-          <li class="w-1/2 h-8">
-            <input
-              id="BetweenVueAndMe"
-              type="checkbox"
-              class="mr-3"
-            >
-            <label for="BetweenVueAndMe">Between Vue</label>
-          </li>
-          <li class="w-1/2 h-8">
-            <input
-              id="EtVueBrute"
-              type="checkbox"
-              class="mr-3"
-            >
-            <label for="EtVueBrute">Et Vue Brute</label>
-          </li>
-          <li class="w-1/2 h-8">
-            <input
-              id="VueAndAHalfMan"
-              type="checkbox"
-              class="mr-3"
-            >
-            <label for="VueAndAHalfMan">Vue and a Half Man</label>
+            <label :for="organization">{{ organization }}</label>
           </li>
         </ul>
       </fieldset>
@@ -48,6 +28,11 @@ export default {
   name: 'JobFilterSidebarOrganizations',
   components: {
     TheAccordion,
+  },
+  computed: {
+    UNIQUE_ORGANIZATIONS() {
+      return this.$store.getters.UNIQUE_ORGANIZATIONS;
+    },
   },
 };
 </script>
