@@ -14,6 +14,7 @@
               :value="organization"
               type="checkbox"
               class="mr-3"
+              @change="selectOrganization"
             >
             <label
               :for="organization"
@@ -27,8 +28,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import { UNIQUE_ORGANIZATIONS } from '@/store';
+import { mapGetters, mapMutations } from 'vuex';
+import { UNIQUE_ORGANIZATIONS, ADD_SELECTED_ORGANIZATIONS } from '@/store';
 import TheAccordion from '@/components/shared/TheAccordion.vue';
 
 export default {
@@ -43,6 +44,12 @@ export default {
   },
   computed: {
     ...mapGetters([UNIQUE_ORGANIZATIONS]),
+  },
+  methods: {
+    ...mapMutations([ADD_SELECTED_ORGANIZATIONS]),
+    selectOrganization() {
+      this.ADD_SELECTED_ORGANIZATIONS(this.selectedOrganizations);
+    },
   },
 };
 </script>

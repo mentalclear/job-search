@@ -50,6 +50,54 @@ describe('getters', () => {
       expect(result).toEqual(new Set(['Google', 'Amazon']));
     });
   });
+  describe('FILTER_JOBS_BY_ORGANIZATIONS', () => {
+    it('should identify jobs associated with given organization', () => {
+      const state = {
+        jobs: [
+          {
+            organization: 'Google',
+          },
+          {
+            organization: 'Amazon',
+          },
+          {
+            organization: 'Microsoft',
+          },
+        ],
+        selectedOrganizations: ['Google', 'Microsoft'],
+      };
+      const filteredJobs = getters.FILTER_JOBS_BY_ORGANIZATIONS(state);
+      expect(filteredJobs).toEqual([
+        { organization: 'Google' },
+        { organization: 'Microsoft' },
+      ]);
+    });
+  });
+
+  describe('When user has not selected any organizations', () => {
+    it('should return all jobs', () => {
+      const state = {
+        jobs: [
+          {
+            organization: 'Google',
+          },
+          {
+            organization: 'Amazon',
+          },
+          {
+            organization: 'Microsoft',
+          },
+        ],
+        selectedOrganizations: [],
+      };
+      const filteredJobs = getters.FILTER_JOBS_BY_ORGANIZATIONS(state);
+      expect(filteredJobs).toEqual([
+        { organization: 'Google' },
+        { organization: 'Amazon' },
+        { organization: 'Microsoft' },
+      ]);
+    });
+  });
 });
 
 describe('mutations', () => {
@@ -68,6 +116,13 @@ describe('mutations', () => {
       expect(state).toEqual({ jobs: ['Job 1', 'Job 2'] });
     });
   });
+  describe('ADD_SELECTED_ORGANIZATIONS', () => {
+    it('should update organizations that the user has chosen to filter by', () => {
+      const state = { selectedOrganizations: [] };
+      mutations.ADD_SELECTED_ORGANIZATIONS(state, ['Org1', 'Org2']);
+      expect(state).toEqual({ selectedOrganizations: ['Org1', 'Org2'] });
+    });
+  });
 });
 
 describe('state', () => {
@@ -79,5 +134,10 @@ describe('state', () => {
   it('should store job listings', () => {
     const startingState = state();
     expect(startingState.jobs).toEqual([]);
+  });
+
+  it('should store organizations that user wants to filter by', () => {
+    const startingState = state();
+    expect(startingState.selectedOrganizations).toEqual([]);
   });
 });
