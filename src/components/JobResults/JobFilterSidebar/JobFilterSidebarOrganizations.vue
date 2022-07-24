@@ -30,7 +30,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
-import { UNIQUE_ORGANIZATIONS, ADD_SELECTED_ORGANIZATIONS } from '@/store';
+import { UNIQUE_ORGANIZATIONS, ADD_SELECTED_ORGANIZATIONS } from '@/store/constants';
 import TheAccordion from '@/components/shared/TheAccordion.vue';
 
 export default {

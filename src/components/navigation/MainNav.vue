@@ -52,7 +52,7 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex';
-import { LOGIN_USER } from '@/store';
+import { LOGIN_USER } from '@/store/constants';
 import ActionButton from '../shared/ActionButton.vue';
 import ProfileImage from './ProfileImage.vue';
 import SubNav from './SubNav.vue';
