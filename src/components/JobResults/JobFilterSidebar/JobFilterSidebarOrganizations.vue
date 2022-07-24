@@ -10,6 +10,8 @@
           >
             <input
               :id="organization"
+              v-model="selectedOrganizations"
+              :value="organization"
               type="checkbox"
               class="mr-3"
             >
@@ -33,6 +35,11 @@ export default {
   name: 'JobFilterSidebarOrganizations',
   components: {
     TheAccordion,
+  },
+  data() {
+    return {
+      selectedOrganizations: [],
+    };
   },
   computed: {
     ...mapGetters([UNIQUE_ORGANIZATIONS]),
