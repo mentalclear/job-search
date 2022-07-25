@@ -22,55 +22,6 @@ describe('getters', () => {
     });
   });
 
-  describe('FILTER_JOBS_BY_ORGANIZATIONS', () => {
-    it('should identify jobs associated with given organization', () => {
-      const state = {
-        jobs: [
-          {
-            organization: 'Google',
-          },
-          {
-            organization: 'Amazon',
-          },
-          {
-            organization: 'Microsoft',
-          },
-        ],
-        selectedOrganizations: ['Google', 'Microsoft'],
-      };
-      const filteredJobs = getters.FILTER_JOBS_BY_ORGANIZATIONS(state);
-      expect(filteredJobs).toEqual([
-        { organization: 'Google' },
-        { organization: 'Microsoft' },
-      ]);
-    });
-
-    describe('When user has not selected any organizations', () => {
-      it('should return all jobs', () => {
-        const state = {
-          jobs: [
-            {
-              organization: 'Google',
-            },
-            {
-              organization: 'Amazon',
-            },
-            {
-              organization: 'Microsoft',
-            },
-          ],
-          selectedOrganizations: [],
-        };
-        const filteredJobs = getters.FILTER_JOBS_BY_ORGANIZATIONS(state);
-        expect(filteredJobs).toEqual([
-          { organization: 'Google' },
-          { organization: 'Amazon' },
-          { organization: 'Microsoft' },
-        ]);
-      });
-    });
-  });
-
   describe('UNIQUE_JOB_TYPES', () => {
     it('should find unique organizations from a list of jobs', () => {
       const state = {
@@ -89,55 +40,6 @@ describe('getters', () => {
 
       const result = getters.UNIQUE_JOB_TYPES(state);
       expect(result).toEqual(new Set(['Full-time', 'Temporary']));
-    });
-  });
-
-  describe('FILTER_JOBS_BY_JOB_TYPES', () => {
-    it('should identify jobs associated with given job types', () => {
-      const state = {
-        jobs: [
-          {
-            jobType: 'Full-time',
-          },
-          {
-            jobType: 'Temporary',
-          },
-          {
-            jobType: 'Part-time',
-          },
-        ],
-        selectedJobTypes: ['Full-time', 'Part-time'],
-      };
-      const filteredJobs = getters.FILTER_JOBS_BY_JOB_TYPES(state);
-      expect(filteredJobs).toEqual([
-        { jobType: 'Full-time' },
-        { jobType: 'Part-time' },
-      ]);
-    });
-
-    describe('When user has not selected any job types', () => {
-      it('should return all jobs', () => {
-        const state = {
-          jobs: [
-            {
-              jobType: 'Full-time',
-            },
-            {
-              jobType: 'Temporary',
-            },
-            {
-              jobType: 'Part-time',
-            },
-          ],
-          selectedJobTypes: [],
-        };
-        const filteredJobs = getters.FILTER_JOBS_BY_JOB_TYPES(state);
-        expect(filteredJobs).toEqual([
-          { jobType: 'Full-time' },
-          { jobType: 'Temporary' },
-          { jobType: 'Part-time' },
-        ]);
-      });
     });
   });
 
@@ -184,6 +86,28 @@ describe('getters', () => {
         const includeJob = getters.INCLUDE_JOB_BY_JOB_TYPE(state)(job);
         expect(includeJob).toBeTruthy();
       });
+    });
+  });
+
+  describe('FILTERED_JOBS', () => {
+    it('should filter jobs by organization and job types', () => {
+      const INCLUDE_JOB_BY_ORGANIZATION = jest.fn().mockReturnValue(true);
+      const INCLUDE_JOB_BY_JOB_TYPE = jest.fn().mockReturnValue(true);
+
+      const mcokGetters = {
+        INCLUDE_JOB_BY_JOB_TYPE,
+        INCLUDE_JOB_BY_ORGANIZATION,
+      };
+
+      const job = { id: 1, title: 'Best job ever' };
+      const state = {
+        jobs: [job],
+      };
+
+      const result = getters.FILTERED_JOBS(state, mcokGetters);
+      expect(result).toEqual([job]);
+      expect(INCLUDE_JOB_BY_ORGANIZATION).toHaveBeenLastCalledWith(job);
+      expect(INCLUDE_JOB_BY_JOB_TYPE).toHaveBeenCalledWith(job);
     });
   });
 });

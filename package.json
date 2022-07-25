@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit --coverage --verbose",
-    "test:watch": "vue-cli-service test:unit --watch --verbose",
+    "test:watch": "vue-cli-service test:unit --watch",
     "lint": "vue-cli-service lint",
     "backend": "json-server --watch db.json"
   },
