@@ -1,5 +1,5 @@
 import {
-  toRef, toRefs, reactive, computed,
+  toRefs, reactive, computed,
 } from 'vue';
 
 const person = reactive({
