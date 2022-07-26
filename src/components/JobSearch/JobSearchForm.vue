@@ -57,6 +57,8 @@
 </template>
 
 <script>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import ActionButton from '../shared/ActionButton.vue';
 import TextInput from '../shared/TextInput.vue';
 
@@ -66,23 +68,21 @@ export default {
     ActionButton,
     TextInput,
   },
-  data() {
-    return {
-      role: '',
-      location: '',
-    };
-  },
-  methods: {
-    searchForJobs() {
-      this.$router.push({
+  setup() {
+    const router = useRouter();
+    const role = ref('');
+    const location = ref('');
+    const searchForJobs = () => {
+      router.push({
         name: 'JobResults',
         // Query parameters will be sent to the url, like: ?role=blah,location=blah
         query: {
-          role: this.role,
-          location: this.location,
+          role: role.value,
+          location: location.value,
         },
       });
-    },
+    };
+    return { location, role, searchForJobs };
   },
 };
 </script>

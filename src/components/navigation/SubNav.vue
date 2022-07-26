@@ -25,16 +25,23 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import { FILTERED_JOBS } from '@/store/constants';
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+import useConfirmRoute from '@/composables/useConfirmRoute';
 
 export default {
   name: 'SubNav',
-  computed: {
-    ...mapGetters([FILTERED_JOBS]),
-    onJobResultsPage() {
-      return this.$route.name === 'JobResults';
-    },
+  setup() {
+    const store = useStore();
+    // ...mapGetters is substituted by this:
+    const FILTERED_JOBS = computed(() => store.getters.FILTERED_JOBS);
+
+    // This supbbed with composable func below:
+    // const route = useRoute();
+    // const onJobResultsPage = computed(() => route.name === 'JobResults');
+    const onJobResultsPage = useConfirmRoute('JobResults');
+
+    return { onJobResultsPage, FILTERED_JOBS };
   },
 };
 </script>
