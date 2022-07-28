@@ -2,11 +2,13 @@ import { computed } from 'vue';
 import { useStore } from 'vuex';
 
 import {
+  FETCH_JOBS,
   FILTERED_JOBS,
   UNIQUE_JOB_TYPES,
   UNIQUE_ORGANIZATIONS,
 } from '@/store//constants';
 
+/* GETTERS */
 const useFilteredJobs = () => {
   const store = useStore();
   return computed(() => store.getters[FILTERED_JOBS]);
@@ -22,4 +24,13 @@ const useUniqueOrganizations = () => {
   return computed(() => store.getters[UNIQUE_ORGANIZATIONS]);
 };
 
-export { useFilteredJobs, useUniqueJobTypes, useUniqueOrganizations };
+/* ACTIONS */
+const useFetchJobsDispatch = () => {
+  const store = useStore();
+  store.dispatch(FETCH_JOBS);
+};
+
+
+export {
+  useFilteredJobs, useUniqueJobTypes, useUniqueOrganizations, useFetchJobsDispatch,
+};
