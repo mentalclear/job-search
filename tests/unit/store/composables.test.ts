@@ -7,11 +7,12 @@ import {
 } from '@/store/composables';
 
 jest.mock('vuex');
+const useStoreMock = useStore as jest.Mock;
 
 describe('composables', () => {
   describe('useFilteredJobs', () => {
     it('should retrieve filtered jobs from the store', () => {
-      useStore.mockReturnValue({
+      useStoreMock.mockReturnValue({
         getters: {
           FILTERED_JOBS: [{ id: 1 }],
         },
@@ -24,7 +25,7 @@ describe('composables', () => {
 
   describe('useUniqueJobTypes', () => {
     it('should retrieve unique jobs from store', () => {
-      useStore.mockReturnValue({
+      useStoreMock.mockReturnValue({
         getters: {
           UNIQUE_JOB_TYPES: new Set(['Full-time']),
         },
@@ -37,7 +38,7 @@ describe('composables', () => {
 
   describe('useUniqueOrganizations', () => {
     it('should retrieve unique organizations from store', () => {
-      useStore.mockReturnValue({
+      useStoreMock.mockReturnValue({
         getters: {
           UNIQUE_ORGANIZATIONS: new Set(['Google']),
         },
@@ -51,7 +52,7 @@ describe('composables', () => {
   describe('useFetchJobsDispatch', () => {
     it('should send calls to fetch jobs from API', () => {
       const dispatch = jest.fn();
-      useStore.mockReturnValue({
+      useStoreMock.mockReturnValue({
         dispatch,
       });
       useFetchJobsDispatch();
