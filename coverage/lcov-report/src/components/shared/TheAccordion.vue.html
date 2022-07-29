@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/store/getters.ts</title>
+    <title>Code coverage report for src/components/shared/TheAccordion.vue</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../prettify.css" />
-    <link rel="stylesheet" href="../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../sort-arrow-sprite.png);
+            background-image: url(../../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/store</a> getters.ts</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/components/shared</a> TheAccordion.vue</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -32,14 +32,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -136,8 +136,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -148,65 +146,67 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable no-shadow */
-import {
-  FILTERED_JOBS,
-  INCLUDE_JOB_BY_JOB_TYPE,
-  INCLUDE_JOB_BY_ORGANIZATION,
-  UNIQUE_JOB_TYPES,
-  UNIQUE_ORGANIZATIONS,
-} from '@/store/constants';
-import { GlobalState } from '@/store/types';
-import { Job } from '@/api/types';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
+  &lt;div class="py-5 border-b border-solid border-brand-gray-2"&gt;
+    &lt;div
+      class="flex flex-wrap items-center justify-between cursor-pointer"
+      data-test="clickable-area"
+      @click="open"
+    &gt;
+      &lt;h3 class="text-base font-semibold"&gt;
+        {{ header }}
+      &lt;/h3&gt;
+      &lt;FontAwesomeIcon :icon="caretIcon" /&gt;
+    &lt;/div&gt;
+    &lt;div
+      v-if="isOpen"
+      class="w-full mt-5"
+    &gt;
+      &lt;slot&gt;
+        &lt;p&gt;Whoops, something has forgotten to populate me!&lt;/p&gt;
+      &lt;/slot&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
 &nbsp;
-interface IncludeJobGetters {
-  INCLUDE_JOB_BY_ORGANIZATION: (job: Job) =&gt; boolean,
-  INCLUDE_JOB_BY_JOB_TYPE: (job: Job) =&gt; boolean,
-}
+&lt;script&gt;
+import { computed, ref } from 'vue';
 &nbsp;
-const getters = {
-  [UNIQUE_ORGANIZATIONS](state: GlobalState) {
-    const uniqueOragnizations = new Set&lt;string&gt;();
-    state.jobs.forEach((job) =&gt; {
-      uniqueOragnizations.add(job.organization);
-    });
-    return uniqueOragnizations;
+export default {
+  name: 'TheAccordion',
+  props: {
+    header: {
+      type: String,
+      required: true,
+    },
   },
-  [UNIQUE_JOB_TYPES](state: GlobalState) {
-    const uniqueJobTypes = new Set&lt;string&gt;();
-    state.jobs.forEach((job) =&gt; {
-      uniqueJobTypes.add(job.jobType);
-    });
-    return uniqueJobTypes;
-  },
-  [INCLUDE_JOB_BY_ORGANIZATION]: (state: GlobalState) =&gt; (job: Job) =&gt; {
-    if (state.selectedOrganizations.length === 0) return true;
-    return state.selectedOrganizations.includes(job.organization);
-  },
-  [INCLUDE_JOB_BY_JOB_TYPE]: (state: GlobalState) =&gt; (job: Job) =&gt; {
-    if (state.selectedJobTypes.length === 0) return true;
-    return state.selectedJobTypes.includes(job.jobType);
-  },
+  setup() {
+    // data() analog
+    const isOpen = ref(false);
+    // methods analog
+    const open = () =&gt; {
+      isOpen.value = !isOpen.value;
+    };
+    // computed analog
+    const caretIcon = computed(() =&gt; (isOpen.value ? ['fas', 'angle-up'] : ['fas', 'angle-down']));
 &nbsp;
-  [FILTERED_JOBS](state: GlobalState, getters: IncludeJobGetters) {
-    return state.jobs
-      .filter((job: Job) =&gt; getters.INCLUDE_JOB_BY_ORGANIZATION(job))
-      .filter((job: Job) =&gt; getters.INCLUDE_JOB_BY_JOB_TYPE(job));
+    return { open, isOpen, caretIcon };
   },
 };
-&nbsp;
-export default getters;
+&lt;/script&gt;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -216,14 +216,14 @@ export default getters;
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
                 at Fri Jul 29 2022 10:15:39 GMT-0400 (Eastern Daylight Time)
             </div>
-        <script src="../../prettify.js"></script>
+        <script src="../../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../sorter.js"></script>
-        <script src="../../block-navigation.js"></script>
+        <script src="../../../sorter.js"></script>
+        <script src="../../../block-navigation.js"></script>
     </body>
 </html>
     

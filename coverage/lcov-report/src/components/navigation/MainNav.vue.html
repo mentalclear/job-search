@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/components/JobSearch/JobSearchForm.vue</title>
+    <title>Code coverage report for src/components/navigation/MainNav.vue</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/components/JobSearch</a> JobSearchForm.vue</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/components/navigation</a> MainNav.vue</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>92/92</span>
+                <span class='fraction'>93/93</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>92/92</span>
+                <span class='fraction'>93/93</span>
             </div>
         
             
@@ -155,7 +155,8 @@
 <a name='L90'></a><a href='#L90'>90</a>
 <a name='L91'></a><a href='#L91'>91</a>
 <a name='L92'></a><a href='#L92'>92</a>
-<a name='L93'></a><a href='#L93'>93</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -222,8 +223,24 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -232,113 +249,99 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;!-- eslint-disable vuejs-accessibility/label-has-for --&gt;
-&lt;template&gt;
-  &lt;form
-    class="flex items-center w-full h-12 mt-14
-    border border-solid border-brad-gray-3 rounded-3xl"
-    @submit.prevent="searchForJobs"
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
+  &lt;header
+    :class="['w-full', 'text-sm', headerHeightClass]"
   &gt;
-    &lt;FontAwesomeIcon
-      :icon="['fas', 'search']"
-      class="ml-4 mr-3"
-    /&gt;
-    &lt;div class="flex flex-nowrap flex-1 h-full text-base font-light"&gt;
-      &lt;div class="relative flex items-center flex-1 h-full pr-3"&gt;
-        &lt;label
-          for="role"
-          class="absolute left-0 -top-10"
-        &gt;
-          Role
-        &lt;/label&gt;
-        &lt;TextInput
-          id="role"
-          v-model="role"
-          placeholder="Software Engineer"
-          data-test="role-input"
-        /&gt;
-      &lt;/div&gt;
-&nbsp;
-      &lt;span
-        class="flex items-center h-full px-3
-      border-l border-r border-brand-gray-3 bg-brand-gray-2"
+    &lt;div class="fixed top-0 left-0 w-full h-16 bg-white"&gt;
+      &lt;div
+        class="flex flex-nowrap h-full px-8 mx-auto border-b border-solid border-brand-gray-1"
       &gt;
-        in
-      &lt;/span&gt;
-&nbsp;
-      &lt;div class="relative flex items-center flex-1 h-full pl-3"&gt;
-        &lt;label
-          for="location"
-          class="absolute left-0 -top-10"
+        &lt;RouterLink
+          :to="{name: 'Home'}"
+          class="flex items-center h-full text-xl"
         &gt;
-          Where?
-        &lt;/label&gt;
-        &lt;TextInput
-          id="location"
-          v-model="location"
-          placeholder="Los Angeles"
-          data-test="location-input"
-        /&gt;
+          Bobo Careers
+        &lt;/RouterLink&gt;
+        &lt;nav class="h-full ml-12"&gt;
+          &lt;ul class="flex h-full p-0 m-0 list-none"&gt;
+            &lt;li
+              v-for="link in navLinks"
+              :key="link.text"
+              class="h-full ml-9 first:ml-0"
+              data-test="nav-list-item"
+            &gt;
+              &lt;RouterLink
+                :to="link.url"
+                class="flex items-center h-full py-2.5"
+              &gt;
+                {{ link.text }}
+              &lt;/RouterLink&gt;
+            &lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/nav&gt;
+        &lt;div class="flex items-center h-full ml-auto"&gt;
+          &lt;ActionButton
+            v-if="!isLoggedIn"
+            data-test="login-button"
+            text="Sign In"
+            @click="LOGIN_USER()"
+          /&gt;
+          &lt;ProfileImage
+            v-else
+            data-test="profile-image"
+          /&gt;
+        &lt;/div&gt;
       &lt;/div&gt;
+      &lt;SubNav
+        v-if="isLoggedIn"
+        data-test="subnav"
+      /&gt;
     &lt;/div&gt;
-    &lt;ActionButton
-      text="Search"
-      type="secondary"
-      class="rounded-r-3xl hover:rounded-r-3xl"
-      data-test="form-submit-button"
-    /&gt;
-  &lt;/form&gt;
+  &lt;/header&gt;
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { mapMutations, mapState } from 'vuex';
+import { LOGIN_USER } from '@/store/constants';
 import ActionButton from '../shared/ActionButton.vue';
-import TextInput from '../shared/TextInput.vue';
+import ProfileImage from './ProfileImage.vue';
+import SubNav from './SubNav.vue';
 &nbsp;
 export default {
-  name: 'JobSearchForm',
+  name: 'MainNav',
   components: {
     ActionButton,
-    TextInput,
+    ProfileImage,
+    SubNav,
   },
-  setup() {
-    const router = useRouter();
-    const role = ref('');
-    const location = ref('');
-    const searchForJobs = () =&gt; {
-      router.push({
-        name: 'JobResults',
-        // Query parameters will be sent to the url, like: ?role=blah,location=blah
-        query: {
-          role: role.value,
-          location: location.value,
-        },
-      });
+  data() {
+    return {
+      navLinks: [
+        { text: 'Teams', url: '/teams' },
+        { text: 'Locations', url: '/' },
+        { text: 'Life at BoBo', url: '/' },
+        { text: 'How we hire', url: '/' },
+        { text: 'Students', url: '/' },
+        { text: 'Jobs', url: '/jobs/results' },
+      ],
     };
-    return { location, role, searchForJobs };
+  },
+  computed: {
+    headerHeightClass() {
+      return {
+        'h-16': !this.isLoggedIn,
+        'h-32': this.isLoggedIn,
+      };
+    },
+    ...mapState(['isLoggedIn']),
+  },
+  methods: {
+    // LOGIN_USER needs to be called with parens ()
+    ...mapMutations([LOGIN_USER]),
   },
 };
 &lt;/script&gt;
-&nbsp;
-&lt;style scoped&gt;
-&nbsp;
-&lt;/style&gt;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
