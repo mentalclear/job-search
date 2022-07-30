@@ -21,9 +21,7 @@ export default defineComponent({
       type: String,
       required: false,
       default: 'primary',
-      validator(value: string) {
-        return ['primary', 'secondary'].includes(value);
-      },
+      validator: (value: string) => ['primary', 'secondary'].includes(value),
     },
   },
   setup(props) { // Providing props to setup method

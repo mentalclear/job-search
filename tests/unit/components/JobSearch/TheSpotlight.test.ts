@@ -3,10 +3,11 @@ import axios from 'axios';
 import TheSpotlight from '@/components/JobSearch/TheSpotlight.vue';
 
 jest.mock('axios');
+const axiosGetMock = axios.get as jest.Mock;
 
 describe('TheSpotlight', () => {
   const mockSpotlightResponse = (data = {}) => {
-    axios.get.mockResolvedValue({
+    axiosGetMock.mockResolvedValue({
       data: [
         {
           img: 'Some image',
