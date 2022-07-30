@@ -50,14 +50,15 @@
   </header>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
 import { mapMutations, mapState } from 'vuex';
 import { LOGIN_USER } from '@/store/constants';
 import ActionButton from '../shared/ActionButton.vue';
 import ProfileImage from './ProfileImage.vue';
 import SubNav from './SubNav.vue';
 
-export default {
+export default defineComponent({
   name: 'MainNav',
   components: {
     ActionButton,
@@ -89,5 +90,5 @@ export default {
     // LOGIN_USER needs to be called with parens ()
     ...mapMutations([LOGIN_USER]),
   },
-};
+});
 </script>
