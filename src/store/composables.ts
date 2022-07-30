@@ -13,7 +13,7 @@ import { Job } from '@/api/types';
 /* GETTERS */
 const useFilteredJobs = () => {
   const store = useStore();
-  return computed<Job>(() => store.getters[FILTERED_JOBS]);
+  return computed<Job[]>(() => store.getters[FILTERED_JOBS]);
 };
 
 const useUniqueJobTypes = () => {

@@ -18,7 +18,6 @@ describe('HeaderContainer', () => {
         subtitle: '<h3>Test SubTitle</h3>',
       },
     });
-
     expect(wrapper.text()).toMatch('Test SubTitle');
   });
 });
