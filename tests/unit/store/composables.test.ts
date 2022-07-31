@@ -1,7 +1,9 @@
 import { useStore } from 'vuex';
 import {
+  useFetchDegreesDispatch,
   useFetchJobsDispatch,
   useFilteredJobs,
+  useUniqueDegrees,
   useUniqueJobTypes,
   useUniqueOrganizations,
 } from '@/store/composables';
@@ -20,6 +22,19 @@ describe('composables', () => {
 
       const result = useFilteredJobs();
       expect(result.value).toEqual([{ id: 1 }]);
+    });
+  });
+
+  describe('useUniqueDegrees', () => {
+    it('should retrieve unique degrees from store', () => {
+      useStoreMock.mockReturnValue({
+        getters: {
+          UNIQUE_DEGREES: ['Ph.D'],
+        },
+      });
+
+      const result = useUniqueDegrees();
+      expect(result.value).toEqual(['Ph.D']);
     });
   });
 
@@ -57,6 +72,17 @@ describe('composables', () => {
       });
       useFetchJobsDispatch();
       expect(dispatch).toHaveBeenCalledWith('FETCH_JOBS');
+    });
+  });
+
+  describe('useFetchDegreesDispatch', () => {
+    it('should send calls to fetch degrees from API', () => {
+      const dispatch = jest.fn();
+      useStoreMock.mockReturnValue({
+        dispatch,
+      });
+      useFetchDegreesDispatch();
+      expect(dispatch).toHaveBeenCalledWith('FETCH_DEGREES');
     });
   });
 });

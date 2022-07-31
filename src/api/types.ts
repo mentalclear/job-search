@@ -10,3 +10,8 @@ export interface Job {
     description: [],
     dateAdded: string,
 }
+
+export interface Degree {
+    id: number,
+    degree: string,
+}

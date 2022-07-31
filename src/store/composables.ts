@@ -2,8 +2,10 @@ import { computed } from 'vue';
 import { useStore } from 'vuex';
 
 import {
+  FETCH_DEGREES,
   FETCH_JOBS,
   FILTERED_JOBS,
+  UNIQUE_DEGREES,
   UNIQUE_JOB_TYPES,
   UNIQUE_ORGANIZATIONS,
 } from '@/store/constants';
@@ -15,6 +17,11 @@ import { key } from '@/store';
 const useFilteredJobs = () => {
   const store = useStore(key);
   return computed<Job[]>(() => store.getters[FILTERED_JOBS]);
+};
+
+const useUniqueDegrees = () => {
+  const store = useStore(key);
+  return computed<string[]>(() => store.getters[UNIQUE_DEGREES]);
 };
 
 const useUniqueJobTypes = () => {
@@ -33,7 +40,16 @@ const useFetchJobsDispatch = () => {
   store.dispatch(FETCH_JOBS);
 };
 
+const useFetchDegreesDispatch = () => {
+  const store = useStore(key);
+  store.dispatch(FETCH_DEGREES);
+};
 
 export {
-  useFilteredJobs, useUniqueJobTypes, useUniqueOrganizations, useFetchJobsDispatch,
+  useFilteredJobs,
+  useUniqueDegrees,
+  useUniqueJobTypes,
+  useUniqueOrganizations,
+  useFetchDegreesDispatch,
+  useFetchJobsDispatch,
 };
