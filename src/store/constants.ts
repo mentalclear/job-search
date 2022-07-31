@@ -1,6 +1,13 @@
 /* USER */
 export const LOGIN_USER = 'LOGIN_USER';
 
+/* DEGREES */
+export const RECEIVE_DEGREES = 'RECEIVE_DEGREES';
+export const FETCH_DEGREES = 'FETCH_DEGREES';
+export const UNIQUE_DEGREES = 'UNIQUE_DEGREES';
+export const INCLUDE_JOB_BY_DEGREE = 'INCLUDE_JOB_BY_DEGREE';
+export const ADD_SELECTED_DEGREES = 'ADD_SELECTED_DEGREES';
+
 /* JOBS */
 export const RECEIVE_JOBS = 'RECEIVE_JOBS';
 export const FETCH_JOBS = 'FETCH_JOBS';
