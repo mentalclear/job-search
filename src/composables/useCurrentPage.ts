@@ -3,7 +3,8 @@ import { computed } from 'vue';
 
 const useCurentPage = () => {
   const route = useRoute();
-  return computed(() => Number.parseInt(route.query.page || '1', 10));
+  const page = route.query.page as string;
+  return computed(() => Number.parseInt(page || '1', 10));
 };
 
 export default useCurentPage;

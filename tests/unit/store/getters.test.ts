@@ -4,7 +4,7 @@ import { createJob, createState } from './utils';
 describe('getters', () => {
   describe('UNIQUE_ORGANIZATIONS', () => {
     it('should find unique organizations from a list of jobs', () => {
-      const jobs =  [
+      const jobs = [
         createJob({ organization: 'Google' }),
         createJob({ organization: 'Amazon' }),
         createJob({ organization: 'Google' }),
@@ -18,7 +18,7 @@ describe('getters', () => {
 
   describe('UNIQUE_JOB_TYPES', () => {
     it('should find unique organizations from a list of jobs', () => {
-      const jobs =  [
+      const jobs = [
         createJob({ jobType: 'Full-time' }),
         createJob({ jobType: 'Temporary' }),
         createJob({ jobType: 'Full-time' }),
