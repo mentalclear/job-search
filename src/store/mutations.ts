@@ -1,4 +1,5 @@
 import {
+  CLEAR_USER_JOB_FILTER_SELECTIONS,
   LOGIN_USER,
   RECEIVE_DEGREES,
   RECEIVE_JOBS,
@@ -8,6 +9,7 @@ import {
 } from '@/store/constants';
 import { GlobalState } from '@/store/types';
 import { Degree, Job } from '@/api/types';
+
 
 const mutations = {
   [LOGIN_USER](state: GlobalState) {
@@ -27,6 +29,11 @@ const mutations = {
   },
   [ADD_SELECTED_DEGREES](state: GlobalState, degrees: string[]) {
     state.selectedDegrees = degrees;
+  },
+  [CLEAR_USER_JOB_FILTER_SELECTIONS](state: GlobalState) {
+    state.selectedDegrees = [];
+    state.selectedJobTypes = [];
+    state.selectedOrganizations = [];
   },
 };
 

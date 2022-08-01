@@ -32,7 +32,7 @@ describe('JobListings', () => {
       expect(useFetchJobsDispatch).toHaveBeenCalled();
     });
 
-    it('should make call to fetch degrees from API', () => {      
+    it('should make call to fetch degrees from API', () => {
       useFilteredJobsMock.mockReturnValue({ value: [] });
       useCurrentPageMock.mockReturnValue({ value: 2 });
       usePreviousAndNextPagesMock.mockReturnValue({ previousPage: 1, nextPage: 3 });
