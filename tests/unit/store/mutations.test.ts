@@ -55,4 +55,19 @@ describe('mutations', () => {
       expect(startState.selectedDegrees).toEqual(['Ph.D', 'Associate']);
     });
   });
+
+  describe('CLEAR_USER_JOB_FILTER_SELECTIONS', () => {
+    it('should remove all job filters user has chaosen', () => {
+      const startingState = createState({
+        selectedDegrees: ['Random degree'],
+        selectedOrganizations: ['Random organization'],
+        selectedJobTypes: ['Random job type'],
+      });
+
+      mutations.CLEAR_USER_JOB_FILTER_SELECTIONS(startingState);
+      expect(startingState.selectedDegrees).toEqual([]);
+      expect(startingState.selectedJobTypes).toEqual([]);
+      expect(startingState.selectedOrganizations).toEqual([]);
+    });
+  });
 });
