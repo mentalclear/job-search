@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>48/48</span>
+                <span class='fraction'>64/64</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>22/22</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>48/48</span>
+                <span class='fraction'>64/64</span>
             </div>
         
             
@@ -111,7 +111,23 @@
 <a name='L46'></a><a href='#L46'>46</a>
 <a name='L47'></a><a href='#L47'>47</a>
 <a name='L48'></a><a href='#L48'>48</a>
-<a name='L49'></a><a href='#L49'>49</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -133,17 +149,33 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -162,8 +194,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable no-shadow */
 import {
   FILTERED_JOBS,
+  INCLUDE_JOB_BY_DEGREE,
   INCLUDE_JOB_BY_JOB_TYPE,
   INCLUDE_JOB_BY_ORGANIZATION,
+  INCLUDE_JOB_BY_SKILL,
+  UNIQUE_DEGREES,
   UNIQUE_JOB_TYPES,
   UNIQUE_ORGANIZATIONS,
 } from '@/store/constants';
@@ -173,6 +208,8 @@ import { Job } from '@/api/types';
 interface IncludeJobGetters {
   INCLUDE_JOB_BY_ORGANIZATION: (job: Job) =&gt; boolean,
   INCLUDE_JOB_BY_JOB_TYPE: (job: Job) =&gt; boolean,
+  INCLUDE_JOB_BY_DEGREE: (job: Job) =&gt; boolean,
+  INCLUDE_JOB_BY_SKILL: (job: Job) =&gt; boolean,
 }
 &nbsp;
 const getters = {
@@ -183,12 +220,19 @@ const getters = {
     });
     return uniqueOragnizations;
   },
+  [UNIQUE_DEGREES](state: GlobalState) {
+    return state.degrees.map(degree =&gt; degree.degree);
+  },
   [UNIQUE_JOB_TYPES](state: GlobalState) {
     const uniqueJobTypes = new Set&lt;string&gt;();
     state.jobs.forEach((job) =&gt; {
       uniqueJobTypes.add(job.jobType);
     });
     return uniqueJobTypes;
+  },
+  [INCLUDE_JOB_BY_DEGREE]: (state: GlobalState) =&gt; (job: Job) =&gt; {
+    if (state.selectedDegrees.length === 0) return true;
+    return state.selectedDegrees.includes(job.degree);
   },
   [INCLUDE_JOB_BY_ORGANIZATION]: (state: GlobalState) =&gt; (job: Job) =&gt; {
     if (state.selectedOrganizations.length === 0) return true;
@@ -198,11 +242,15 @@ const getters = {
     if (state.selectedJobTypes.length === 0) return true;
     return state.selectedJobTypes.includes(job.jobType);
   },
-&nbsp;
+  [INCLUDE_JOB_BY_SKILL]: (state: GlobalState) =&gt; (job: Job) =&gt; job.title
+    .toLowerCase()
+    .includes(state.skillsSearchTerm.toLocaleLowerCase()),
   [FILTERED_JOBS](state: GlobalState, getters: IncludeJobGetters) {
     return state.jobs
       .filter((job: Job) =&gt; getters.INCLUDE_JOB_BY_ORGANIZATION(job))
-      .filter((job: Job) =&gt; getters.INCLUDE_JOB_BY_JOB_TYPE(job));
+      .filter((job: Job) =&gt; getters.INCLUDE_JOB_BY_JOB_TYPE(job))
+      .filter((job: Job) =&gt; getters.INCLUDE_JOB_BY_DEGREE(job))
+      .filter((job: Job) =&gt; getters.INCLUDE_JOB_BY_SKILL(job));
   },
 };
 &nbsp;
@@ -214,7 +262,7 @@ export default getters;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Fri Jul 29 2022 10:15:39 GMT-0400 (Eastern Daylight Time)
+                at Mon Aug 01 2022 20:46:50 GMT-0400 (Eastern Daylight Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

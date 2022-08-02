@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">94.02% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>69/69</span>
+                <span class='fraction'>63/67</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">94.02% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>69/69</span>
+                <span class='fraction'>63/67</span>
             </div>
         
             
@@ -130,17 +130,7 @@
 <a name='L65'></a><a href='#L65'>65</a>
 <a name='L66'></a><a href='#L66'>66</a>
 <a name='L67'></a><a href='#L67'>67</a>
-<a name='L68'></a><a href='#L68'>68</a>
-<a name='L69'></a><a href='#L69'>69</a>
-<a name='L70'></a><a href='#L70'>70</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L68'></a><a href='#L68'>68</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -191,6 +181,12 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -202,53 +198,45 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
-  &lt;TheAccordion :header="header"&gt;
-    &lt;div class="mt-5"&gt;
-      &lt;fieldset&gt;
-        &lt;ul class="flex flex-row flex-wrap"&gt;
-          &lt;li
-            v-for="value in uniqueValues"
-            :key="value"
-            class="w-1/2 h-8"
+  &lt;div class="mt-5"&gt;
+    &lt;fieldset&gt;
+      &lt;ul class="flex flex-row flex-wrap"&gt;
+        &lt;li
+          v-for="value in uniqueValues"
+          :key="value"
+          class="w-1/2 h-8"
+        &gt;
+          &lt;input
+            :id="value"
+            v-model="selectedValues"
+            :value="value"
+            :data-test="value"
+            type="checkbox"
+            class="mr-3"
+            @change="selectValue"
           &gt;
-            &lt;input
-              :id="value"
-              v-model="selectedValues"
-              :value="value"
-              :data-test="value"
-              type="checkbox"
-              class="mr-3"
-              @change="selectValue"
-            &gt;
-            &lt;label
-              :for="value"
-              data-test="value"
-            &gt;{{ value }}&lt;/label&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/fieldset&gt;
-    &lt;/div&gt;
-  &lt;/TheAccordion&gt;
+          &lt;label
+            :for="value"
+            data-test="value"
+          &gt;{{ value }}&lt;/label&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/fieldset&gt;
+  &lt;/div&gt;
 &lt;/template&gt;
 &nbsp;
-&lt;script&gt;
-import { ref } from 'vue';
+&lt;script lang="ts"&gt;
+import { ref, defineComponent, PropType } from 'vue';
+import { CLEAR_USER_JOB_FILTER_SELECTIONS } from '@/store/constants';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
-import TheAccordion from '@/components/shared/TheAccordion.vue';
+import { key } from '@/store';
 &nbsp;
-export default {
+export default defineComponent({
   name: 'JobFilterSidebarCheckboxGroup',
-  components: {
-    TheAccordion,
-  },
   props: {
-    header: {
-      type: String,
-      required: true,
-    },
     uniqueValues: {
-      type: Set,
+      type: [Array, Set] as PropType&lt;string[] | Set&lt;String&gt;&gt;,
       required: true,
     },
     mutation: {
@@ -257,9 +245,15 @@ export default {
     },
   },
   setup(props) {
-    const store = useStore();
+    const store = useStore(key);
     const router = useRouter();
-    const selectedValues = ref([]);
+    const selectedValues = ref&lt;string[]&gt;([]);
+&nbsp;
+    store.subscribe((mutation) =&gt; {
+<span class="cstat-no" title="statement not covered" >      if (mutation.type === CLEAR_USER_JOB_FILTER_SELECTIONS) {</span>
+<span class="cstat-no" title="statement not covered" >        selectedValues.value = [];</span>
+<span class="cstat-no" title="statement not covered" >      }</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
 &nbsp;
     const selectValue = () =&gt; {
       store.commit(props.mutation, selectedValues.value);
@@ -268,7 +262,7 @@ export default {
 &nbsp;
     return { selectValue, selectedValues };
   },
-};
+});
 &lt;/script&gt;
 &nbsp;</pre></td></tr></table></pre>
 
@@ -277,7 +271,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Fri Jul 29 2022 10:15:39 GMT-0400 (Eastern Daylight Time)
+                at Mon Aug 01 2022 20:46:50 GMT-0400 (Eastern Daylight Time)
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
