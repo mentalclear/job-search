@@ -29,4 +29,8 @@ describe('state', () => {
     const startingState = state();
     expect(startingState.selectedJobTypes).toEqual([]);
   });
+  it('should store user search term for skills and qualifications', () => {
+    const startingState = state();
+    expect(startingState.skillsSearchTerm).toBe('');
+  });
 });

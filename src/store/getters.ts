@@ -4,6 +4,7 @@ import {
   INCLUDE_JOB_BY_DEGREE,
   INCLUDE_JOB_BY_JOB_TYPE,
   INCLUDE_JOB_BY_ORGANIZATION,
+  INCLUDE_JOB_BY_SKILL,
   UNIQUE_DEGREES,
   UNIQUE_JOB_TYPES,
   UNIQUE_ORGANIZATIONS,
@@ -15,6 +16,7 @@ interface IncludeJobGetters {
   INCLUDE_JOB_BY_ORGANIZATION: (job: Job) => boolean,
   INCLUDE_JOB_BY_JOB_TYPE: (job: Job) => boolean,
   INCLUDE_JOB_BY_DEGREE: (job: Job) => boolean,
+  INCLUDE_JOB_BY_SKILL: (job: Job) => boolean,
 }
 
 const getters = {
@@ -47,12 +49,15 @@ const getters = {
     if (state.selectedJobTypes.length === 0) return true;
     return state.selectedJobTypes.includes(job.jobType);
   },
-
+  [INCLUDE_JOB_BY_SKILL]: (state: GlobalState) => (job: Job) => job.title
+    .toLowerCase()
+    .includes(state.skillsSearchTerm.toLocaleLowerCase()),
   [FILTERED_JOBS](state: GlobalState, getters: IncludeJobGetters) {
     return state.jobs
       .filter((job: Job) => getters.INCLUDE_JOB_BY_ORGANIZATION(job))
       .filter((job: Job) => getters.INCLUDE_JOB_BY_JOB_TYPE(job))
-      .filter((job: Job) => getters.INCLUDE_JOB_BY_DEGREE(job));
+      .filter((job: Job) => getters.INCLUDE_JOB_BY_DEGREE(job))
+      .filter((job: Job) => getters.INCLUDE_JOB_BY_SKILL(job));
   },
 };
 
