@@ -1,4 +1,5 @@
 import { GlobalState } from '@/store/types';
+import { stringify } from 'postcss';
 
 const state = (): GlobalState => ({
   isLoggedIn: false,
@@ -7,6 +8,7 @@ const state = (): GlobalState => ({
   selectedDegrees: [],
   selectedOrganizations: [],
   selectedJobTypes: [],
+  skillsSearchTerm: '',
 });
 
 export default state;

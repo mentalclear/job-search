@@ -62,12 +62,24 @@ describe('mutations', () => {
         selectedDegrees: ['Random degree'],
         selectedOrganizations: ['Random organization'],
         selectedJobTypes: ['Random job type'],
+        skillsSearchTerm: 'Blah blah blah',
       });
 
       mutations.CLEAR_USER_JOB_FILTER_SELECTIONS(startingState);
       expect(startingState.selectedDegrees).toEqual([]);
       expect(startingState.selectedJobTypes).toEqual([]);
       expect(startingState.selectedOrganizations).toEqual([]);
+      expect(startingState.skillsSearchTerm).toEqual('');
+    });
+  });
+
+  describe('UPDATE_SKILLS_SEARCH_TERM', () => {
+    it('should recieve search term fro skills the user has', () => {
+      const startingState = createState({
+        skillsSearchTerm: '',
+      });
+      mutations.UPDATE_SKILLS_SEARCH_TERM(startingState, 'Vue');
+      expect(startingState.skillsSearchTerm).toEqual('Vue');
     });
   });
 });

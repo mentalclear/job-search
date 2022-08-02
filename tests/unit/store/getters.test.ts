@@ -110,16 +110,41 @@ describe('getters', () => {
     });
   });
 
+  describe('INCLUDE_JOB_BY_SKILL', () => {
+    it('should identify if job match user skill', () => {
+      const state = createState({ skillsSearchTerm: 'Vue' });
+      const job = createJob({ title: 'Vue Developer' });
+      const includeJob = getters.INCLUDE_JOB_BY_SKILL(state)(job);
+      expect(includeJob).toBeTruthy();
+    });
+    it('shuold handle inconsistent character casing', () => {
+      const state = createState({ skillsSearchTerm: 'vuE' });
+      const job = createJob({ title: 'Vue Developer' });
+      const includeJob = getters.INCLUDE_JOB_BY_SKILL(state)(job);
+      expect(includeJob).toBeTruthy();
+    });
+    describe('when user has not entered any skills', () => {
+      it('should include jobs', () => {
+        const state = createState({ skillsSearchTerm: '' });
+        const job = createJob({ title: 'Vue Developer' });
+        const includeJob = getters.INCLUDE_JOB_BY_SKILL(state)(job);
+        expect(includeJob).toBeTruthy();
+      });
+    });
+  });
+
   describe('FILTERED_JOBS', () => {
     it('should filter jobs by organization, job types and degree', () => {
       const INCLUDE_JOB_BY_ORGANIZATION = jest.fn().mockReturnValue(true);
       const INCLUDE_JOB_BY_JOB_TYPE = jest.fn().mockReturnValue(true);
       const INCLUDE_JOB_BY_DEGREE = jest.fn().mockReturnValue(true);
+      const INCLUDE_JOB_BY_SKILL = jest.fn().mockReturnValue(true);
 
       const mockGetters = {
         INCLUDE_JOB_BY_DEGREE,
         INCLUDE_JOB_BY_JOB_TYPE,
         INCLUDE_JOB_BY_ORGANIZATION,
+        INCLUDE_JOB_BY_SKILL,
       };
 
       const job = createJob({ title: 'Best job ever' });
@@ -132,6 +157,7 @@ describe('getters', () => {
       expect(INCLUDE_JOB_BY_DEGREE).toHaveBeenCalledWith(job);
       expect(INCLUDE_JOB_BY_ORGANIZATION).toHaveBeenLastCalledWith(job);
       expect(INCLUDE_JOB_BY_JOB_TYPE).toHaveBeenCalledWith(job);
+      expect(INCLUDE_JOB_BY_SKILL).toHaveBeenCalledWith(job);
     });
   });
 });
